@@ -21,13 +21,29 @@ function App () {
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <label htmlFor='search'>Search:</label>
-      <input id='search' type='text' />
+      <Search />
 
       <hr />
 
-      <ul>
-        {list.map(item => (
+      <List />
+    </div>
+  )
+}
+
+const Search = () => {
+  return (
+    <div>
+      <label htmlFor='search'>Search: </label>
+      <input id='search' type='text' />
+    </div>
+  )
+}
+
+const List = () => {
+  return (
+    <ul>
+      {list.map(item => {
+        return (
           <li key={item.objectID}>
             <span>
               <a href={item.url}>{item.title}</a>
@@ -36,9 +52,9 @@ function App () {
             <span>{item.num_comments}</span>
             <span>{item.points}</span>
           </li>
-        ))}
-      </ul>
-    </div>
+        )
+      })}
+    </ul>
   )
 }
 
