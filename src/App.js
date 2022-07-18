@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const App = () => {
   const stories = [
     {
@@ -22,23 +24,27 @@ const App = () => {
     <div>
       <h1>My Hacker Stories</h1>
       <Search />
-
       <hr />
-
       <List list={stories} />
     </div>
   )
 }
 
 const Search = () => {
+  const [searchTerm, setSearchTerm] = useState('')
+
   const handleChange = e => {
-    console.log(e.target.value)
+    setSearchTerm(e.target.value)
   }
 
   return (
     <div>
       <label htmlFor='search'>Search: </label>
       <input id='search' type='text' onChange={handleChange} />
+
+      <p>
+        Searching for: <strong>{searchTerm}</strong>
+      </p>
     </div>
   )
 }
