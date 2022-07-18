@@ -20,21 +20,27 @@ const App = () => {
     }
   ]
 
+  const handleSearch = e => {
+    console.log(e.target.value)
+  }
+
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <Search />
+      <Search onSearch={handleSearch} />
       <hr />
       <List list={stories} />
     </div>
   )
 }
 
-const Search = () => {
+const Search = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   const handleChange = e => {
     setSearchTerm(e.target.value)
+
+    onSearch(e)
   }
 
   return (
