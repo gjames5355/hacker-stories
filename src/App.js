@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('React')
 
   const stories = [
     {
@@ -33,18 +33,18 @@ const App = () => {
   return (
     <div>
       <h1>My Hacker Stories</h1>
-      <Search onSearch={handleSearch} />
+      <Search search={searchTerm} onSearch={handleSearch} />
       <hr />
       <List list={searchedStories} />
     </div>
   )
 }
 
-const Search = ({ onSearch }) => {
+const Search = ({ onSearch, search }) => {
   return (
     <div>
       <label htmlFor='search'>Search: </label>
-      <input id='search' type='text' onChange={onSearch} />
+      <input id='search' type='text' onChange={onSearch} value={search} />
     </div>
   )
 }
