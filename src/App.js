@@ -1,26 +1,32 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+const stories = [
+  {
+    title: 'React',
+    url: 'https://reactjs.org/',
+    author: 'Jordan Walke',
+    num_comments: 3,
+    points: 4,
+    objectID: 0
+  },
+  {
+    title: 'Redux',
+    url: 'https://redux.js.org/',
+    author: 'Dan Abramov, Andrew Clark',
+    num_comments: 2,
+    points: 5,
+    objectID: 1
+  }
+]
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState('React')
+  const [searchTerm, setSearchTerm] = useState(
+    localStorage.getItem('search') || 'React'
+  )
 
-  const stories = [
-    {
-      title: 'React',
-      url: 'https://reactjs.org/',
-      author: 'Jordan Walke',
-      num_comments: 3,
-      points: 4,
-      objectID: 0
-    },
-    {
-      title: 'Redux',
-      url: 'https://redux.js.org/',
-      author: 'Dan Abramov, Andrew Clark',
-      num_comments: 2,
-      points: 5,
-      objectID: 1
-    }
-  ]
+  useEffect(() => {
+    localStorage.setItem('search', searchTerm)
+  }, [searchTerm])
 
   const handleSearch = e => {
     setSearchTerm(e.target.value)
@@ -53,20 +59,27 @@ const List = ({ list }) => {
   return (
     <ul>
       {list.map(item => (
-        <Item key={item.objectID} item={item} />
+        <Item
+          key={item.objectID}
+          title={item.title}
+          url={item.url}
+          author={item.author}
+          num_comments={item.num_comments}
+          points={item.points}
+        />
       ))}
     </ul>
   )
 }
 
-const Item = ({ item }) => (
+const Item = ({ title, url, author, num_comments, points }) => (
   <li>
     <span>
-      <a href={item.url}>{item.title}</a>
+      <a href={url}>{title}</a>
     </span>
-    <span>{item.author}</span>
-    <span>{item.num_comments}</span>
-    <span>{item.points}</span>
+    <span>{author}</span>
+    <span>{num_comments}</span>
+    <span>{points}</span>
   </li>
 )
 
